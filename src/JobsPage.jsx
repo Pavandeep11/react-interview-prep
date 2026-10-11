@@ -5,6 +5,8 @@ function JobsPage() {
 	const[ jobs, setjobs] = useState([]);
 	const[ loading, setLoading ] = useState(true);
 	const[ error, setError] = useState("");
+	const[ status, setStatus] = useState("all");
+	const[ search, setSearch] = useState("");
 	
 	useEffect( () => {
 		
@@ -38,10 +40,32 @@ function JobsPage() {
 		return <p>Error : {error}</p>;
 	}
 	
+	const filteredJobs = jobs.filter((job) => {
+		const matchSearch = job.title.toLowerCase().includes(search.toLowerCase()) ||
+		job.company?.name.toLowerCase().includes(search.toLowerCase());
+		
+		const matchesStatus = status == "all" || job.status === status;
+	
+		return matchSearch && matchesStatus;
+	});
+	
+
+	
 	return(
 		<div>
 			<h1>Job tracking</h1>
-				{jobs?.length === 0 ? (<p>No Jobs Found.</p>) : (jobs?.map((job) => (
+			<input
+			    type="text"
+				placeholder="Search title or company..."
+				value={search}
+				onChange={(e) => setSearch(e.target.value)}/>
+			<select value={status}
+				onChange={e => setStatus(e.target.value)}>
+					<option value="all">All Jobs</option>
+					<option value="open">Open</option>
+					<option value="closed">Closed</option>
+				</select>
+				{filteredJobs?.length === 0 ? (<p>No Jobs Found.</p>) : (filteredJobs?.map((job) => (
 					<div key ={job.id}>
 						<h2>Title: {job.title}</h2>
 						<p>Company: {job.company?.name}</p>
