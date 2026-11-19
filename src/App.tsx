@@ -1,10 +1,9 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './App.css'
-import { JobList } from './assets/JobList'
 import { CreateJob } from './assets/CreateJob'
 import JobsPage from "./JobsPage"
 import JobDetails from "./JobDetails"
-import EditJob from "./EditJob";
+import { EditJob } from "./assets/EditJob";
 
 function App() {
   return (
@@ -15,7 +14,7 @@ function App() {
         <Route path="/jobs/:id" element={<JobDetails />} />
         <Route path="/jobs/:id/edit" element={<EditJob />} />
         {/* Your other pages */}
-        <Route path="/jobs" element={<JobList />} />
+        <Route path="/jobs" element={<JobsPage />} />
         <Route path="/create" element={<CreateJob />} />
       </Routes>
     </BrowserRouter>

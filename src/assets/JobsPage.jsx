@@ -1,7 +1,7 @@
 import{ useState, useEffect } from 'react';
-import useDebounce from "./hooks/useDebounce";
 import { Link } from "react-router-dom";
-import StatusBadge from "./components/StatusBadge";
+import useDebounce from "../hooks/useDebounce";
+import StatusBadge from "../components/StatusBadge";
 
 
 function formatSalary(min, max) {
@@ -170,9 +170,7 @@ function JobsPage() {
 					</Link>
 					<p>Company: {job.company?.name}</p>
 					<p>Location: {job.location}</p>
-					<p>
 					<p>{formatSalary(job.salary_min, job.salary_max)}</p>
-					</p>
 					<p>Status: {job.status}</p>
 					<hr />
 					</div>
